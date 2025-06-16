@@ -1,7 +1,7 @@
 package software.ulpgc.simulator.architecture.control;
 
 import software.ulpgc.simulator.architecture.model.Pendulum;
-import software.ulpgc.simulator.app.SwingPendulumDisplay;
+import software.ulpgc.simulator.app.swing.SwingPendulumDisplay;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,7 +10,7 @@ public class PendulumPresenter {
     private final SwingPendulumDisplay view;
     private final PendulumSimulator simulator;
     private Pendulum pendulum;
-    private final static int period = (int) (1000 * 0.001);
+    private final static int period = (int) (1000 * 0.001); // 1 ms period
 
     public PendulumPresenter(SwingPendulumDisplay view, PendulumSimulator simulator, Pendulum pendulum) {
         this.view = view;
@@ -40,6 +40,7 @@ public class PendulumPresenter {
             double pendulumX = originX + pendulum.L() * 200 * Math.sin(pendulum.theta());
             double pendulumY = originY + pendulum.L() * 200 * Math.cos(pendulum.theta());
             view.updatePendulumPosition(pendulumX, pendulumY);
+            view.updateAcceleration(Math.abs(simulator.acceleration(pendulum.theta(), pendulum.g(), pendulum.L())));
         } else {
             double dx = view.getPendulumX() - originX;
             double dy = view.getPendulumY() - originY;
@@ -49,5 +50,4 @@ public class PendulumPresenter {
             pendulum = new Pendulum(newRopeLength, pendulum.r(), pendulum.g(), newTheta, 0.0);
         }
     }
-
 }

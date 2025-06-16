@@ -43,7 +43,7 @@ public class PendulumSimulator {
         return new double[]{newTheta, newOmega};
     }
 
-    private double acceleration(double theta, double g, double L) {
+    public double acceleration(double theta, double g, double L) {
         return (g /  L) * Math.sin(theta);
     }
 }

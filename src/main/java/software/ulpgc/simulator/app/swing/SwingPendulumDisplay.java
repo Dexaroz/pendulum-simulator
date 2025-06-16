@@ -1,4 +1,4 @@
-package software.ulpgc.simulator.app;
+package software.ulpgc.simulator.app.swing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +11,17 @@ public class SwingPendulumDisplay extends JPanel {
     private double pendulumX;
     private double pendulumY;
     private boolean dragging = false;
+    private final JLabel accelerationLabel;
 
     public SwingPendulumDisplay() {
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.WHITE);
+
+        accelerationLabel = new JLabel("Acceleration: 0.0 m/s²");
+        accelerationLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        accelerationLabel.setForeground(Color.WHITE);
+        this.setLayout(new BorderLayout());
+        this.add(accelerationLabel, BorderLayout.SOUTH);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -61,6 +68,10 @@ public class SwingPendulumDisplay extends JPanel {
         this.pendulumX = x;
         this.pendulumY = y;
         repaint();
+    }
+
+    public void updateAcceleration(double acceleration) {
+        accelerationLabel.setText(String.format("Acceleration: %.2f m/s²", acceleration));
     }
 
     public double getNewRopeLength() {

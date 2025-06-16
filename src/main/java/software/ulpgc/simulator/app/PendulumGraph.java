@@ -37,7 +37,7 @@ public class PendulumGraph {
         );
 
         NumberAxis yAxis = (NumberAxis) chart.getXYPlot().getRangeAxis();
-        yAxis.setAutoRangeIncludesZero(false); // For better scaling
+        yAxis.setAutoRangeIncludesZero(false);
 
         JFrame frame = new JFrame("Pendulum Graph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
